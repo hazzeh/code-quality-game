@@ -135,9 +135,9 @@ public final class SonarDataRetriever {
         }
 
         URI getResolvedIssuesForAssignee(final String assignee, final int pageIndex) {
+            String assigneeVariants = String.join(",", assignee,assignee.toLowerCase(),assignee.toUpperCase());
             return UriComponentsBuilder.fromHttpUrl(sonarUrl + GET_ISSUES_COMMAND)
-                    .buildAndExpand(sonarOrganization, assignee.toLowerCase() + "," + assignee.toUpperCase(),
-                            pageIndex, 500)
+                    .buildAndExpand(sonarOrganization, assigneeVariants, pageIndex, 500)
                     .toUri();
         }
     }
